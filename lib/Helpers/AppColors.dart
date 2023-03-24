@@ -15,4 +15,4 @@ extension hexcode on String {
 }
 
 // 282A3A
-Color blackBackground = "282A3A".getColorForHex();
+Color blackBackground = "#0C090A".getColorForHex();
