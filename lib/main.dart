@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:picsizer/View/Home/HomePage.dart';
+import 'package:picsizer/Controller/ResizeImageContoller.dart';
+import 'package:picsizer/Controller/SelectImageController.dart';
+import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/ColorPicker/ColorPicker.dart';
 
-void main() {
+import 'package:picsizer/View/Home/HomePage.dart';
+import 'package:picsizer/View/ResizeImage/ResizeImageScreen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FileService.shared.createFolder();
   runApp(RootPage());
 }
 
@@ -11,8 +20,10 @@ class RootPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SelectImageContoller());
+    Get.put(ResizeImageContoller());
     return GetMaterialApp(
-      home: HomePage(),
+      home: ImagePickerScreen(),
     );
   }
 }
@@ -21,3 +32,7 @@ class RootPage extends StatelessWidget {
 // https://mobileappcircular.com/how-to-extract-a-color-palette-from-an-image-in-flutter-dart-d3d49699a5eb
 
 // https://www.color-meanings.com/shades-of-black-color-names-html-hex-rgb-codes/
+
+// https://gist.github.com/roipeker/9315aa25301f5c0362caaebd15876c2f get color of pixel
+
+// image_editor_plus: ^0.2.0

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:picsizer/Helpers/AppColors.dart';
+import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Model/HomeTileModel.dart';
 
 class HomePageController extends GetxController {

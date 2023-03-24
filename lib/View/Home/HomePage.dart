@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Controller/HomePageController.dart';
-import 'package:picsizer/Helpers/AppColors.dart';
+import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/View/Home/Card/HomeTile.dart';
 
 class HomePage extends StatelessWidget {
