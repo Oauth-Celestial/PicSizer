@@ -4,7 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
-import 'package:picsizer/View/ColorPicker/ColorPicker.dart';
+import 'package:picsizer/View/ExtractColor/ExtractColor.dart';
 
 import 'package:picsizer/View/Home/HomePage.dart';
 import 'package:picsizer/View/ResizeImage/ResizeImageScreen.dart';
@@ -23,7 +23,7 @@ class RootPage extends StatelessWidget {
     Get.put(SelectImageContoller());
     Get.put(ResizeImageContoller());
     return GetMaterialApp(
-      home: ImagePickerScreen(),
+      home: HomePage(),
     );
   }
 }

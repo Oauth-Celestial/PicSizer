@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Model/HomeTileModel.dart';
+import 'package:picsizer/View/CompressImage/CompressPage.dart';
 
 class HomeTile extends StatelessWidget {
   HomeTileModel tileData;
@@ -13,9 +14,16 @@ class HomeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (tileData.title.toLowerCase() == "resize image") {
-          SelectImageContoller controller = Get.find<SelectImageContoller>();
-          controller.selectSingleImage(context);
+        SelectImageContoller controller = Get.find<SelectImageContoller>();
+        switch (tileData.title.toLowerCase()) {
+          case "resize image":
+            controller.selectSingleImage(context, "resize image");
+            break;
+          case "extract color":
+            controller.selectSingleImage(context, "extract color");
+            break;
+          case "compress image":
+            Get.to(CompressImage());
         }
       },
       child: Container(

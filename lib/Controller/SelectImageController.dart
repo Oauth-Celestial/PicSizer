@@ -1,11 +1,10 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/ExtractColor/ExtractColor.dart';
 import 'package:picsizer/View/ResizeImage/ResizeImageScreen.dart';
 
 class SelectImageContoller extends GetxController {
@@ -35,7 +34,7 @@ class SelectImageContoller extends GetxController {
     }
   }
 
-  selectSingleImage(BuildContext context) async {
+  selectSingleImage(BuildContext context, String navigateTo) async {
     final imagePicker = ImagePicker();
     final XFile? selectedImage =
         await imagePicker.pickImage(source: ImageSource.gallery);
@@ -52,12 +51,29 @@ class SelectImageContoller extends GetxController {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      File image = File(selectedImage.path);
-      var decodedImage = await decodeImageFromList(image.readAsBytesSync());
-      Get.to(() => ResizeImageScreen(
-            selectedImage:
-                FileData(image, decodedImage.width, decodedImage.height),
-          ));
+      if (navigateTo.toLowerCase() == "resize image") {}
+
+      switch (navigateTo.toLowerCase()) {
+        case "resize image":
+          File image = File(selectedImage.path);
+          var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+          Get.to(() => ResizeImageScreen(
+                selectedImage:
+                    FileData(image, decodedImage.width, decodedImage.height),
+              ));
+          break;
+        case "extract color":
+          File image = File(selectedImage.path);
+          var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+          Get.to(() => ExtractColorScreen(
+                selectedImage:
+                    FileData(image, decodedImage.width, decodedImage.height),
+              ));
+          break;
+
+        default:
+          break;
+      }
     }
   }
 }
