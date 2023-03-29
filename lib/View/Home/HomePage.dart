@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Controller/HomePageController.dart';
 import 'package:picsizer/Constants/AppColors.dart';
@@ -26,7 +27,10 @@ class HomePage extends StatelessWidget {
                 "What Can\nI help you with ?",
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
-            ),
+            )
+                .animate()
+                .slideX(delay: Duration(milliseconds: 600))
+                .fadeIn(duration: Duration(milliseconds: 200)),
             SizedBox(
               height: 35,
             ),
@@ -46,10 +50,14 @@ class HomePage extends StatelessWidget {
                                   childAspectRatio: 3 / 1.65),
                           itemBuilder: (context, index) {
                             return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: HomeTile(
-                                  tileData: controller.homeOptions[index],
-                                ));
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: HomeTile(
+                                      tileData: controller.homeOptions[index],
+                                    ))
+                                .animate()
+                                .fadeIn(
+                                    delay: Duration(
+                                        milliseconds: 400 * (index + 1)));
                           }),
                     ),
                   );

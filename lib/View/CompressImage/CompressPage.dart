@@ -19,6 +19,7 @@ class CompressImage extends StatelessWidget {
           child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 50,

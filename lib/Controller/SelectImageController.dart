@@ -51,8 +51,6 @@ class SelectImageContoller extends GetxController {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      if (navigateTo.toLowerCase() == "resize image") {}
-
       switch (navigateTo.toLowerCase()) {
         case "resize image":
           File image = File(selectedImage.path);
