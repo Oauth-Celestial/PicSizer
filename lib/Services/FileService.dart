@@ -9,7 +9,7 @@ import 'package:picsizer/Constants/AppConstants.dart';
 class FileService {
   static FileService shared = FileService();
 
-  getFileSize(String filepath, int decimals) async {
+  Future<String> getFileSize(String filepath, int decimals) async {
     var file = File(filepath);
     int bytes = await file.length();
     if (bytes <= 0) return "0 B";

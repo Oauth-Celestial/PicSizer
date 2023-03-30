@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/CompressImage/SingleImageCompress.dart';
 import 'package:picsizer/View/ExtractColor/ExtractColor.dart';
 import 'package:picsizer/View/ResizeImage/ResizeImageScreen.dart';
 
@@ -66,6 +67,17 @@ class SelectImageContoller extends GetxController {
           Get.to(() => ExtractColorScreen(
                 selectedImage:
                     FileData(image, decodedImage.width, decodedImage.height),
+              ));
+          break;
+
+        case "single compress":
+          File image = File(selectedImage.path);
+          var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+          var filesize =
+              await FileService.shared.getFileSize(selectedImage.path, 2);
+          Get.to(() => SingleImageCompressePreview(
+                selectedImage: FileData(
+                    image, decodedImage.width, decodedImage.height, filesize),
               ));
           break;
 

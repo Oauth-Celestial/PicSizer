@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
+import 'package:picsizer/Controller/SelectImageController.dart';
 
 class CompressImage extends StatelessWidget {
   const CompressImage({super.key});
@@ -25,34 +25,47 @@ class CompressImage extends StatelessWidget {
               height: 50,
             ),
             Center(
-              child: Container(
-                alignment: Alignment.center,
-                width: 200,
-                height: 50,
-                child: Text(
-                  "Single Image",
-                  style: TextStyle(color: Colors.white),
+              child: InkWell(
+                onTap: () {
+                  SelectImageContoller controller =
+                      Get.find<SelectImageContoller>();
+                  controller.selectSingleImage(context, "single compress");
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 200,
+                  height: 50,
+                  child: Text(
+                    "Single Image",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(30)),
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30)),
               ),
             ),
             SizedBox(
               height: 50,
             ),
             Center(
-              child: Container(
-                alignment: Alignment.center,
-                width: 200,
-                height: 50,
-                child: Text(
-                  "Multiple Image",
-                  style: TextStyle(color: Colors.white),
+              child: InkWell(
+                onTap: () {
+                  SelectImageContoller controller = Get.find();
+                  controller.selectSingleImage(context, "single compress");
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 200,
+                  height: 50,
+                  child: Text(
+                    "Multiple Image",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(30)),
                 ),
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(30)),
               ),
             )
           ],

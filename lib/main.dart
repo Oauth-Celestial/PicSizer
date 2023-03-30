@@ -4,6 +4,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/CompressImage/SingleImageCompress.dart';
 import 'package:picsizer/View/ExtractColor/ExtractColor.dart';
 
 import 'package:picsizer/View/Home/HomePage.dart';
