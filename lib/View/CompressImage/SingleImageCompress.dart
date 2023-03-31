@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
+import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 
@@ -10,6 +11,7 @@ class SingleImageCompressePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CompressImageController imageController = Get.find();
     Size deviceSize = MediaQuery.of(context).size;
     ResizeImageContoller controller = Get.find<ResizeImageContoller>();
     return Scaffold(
@@ -99,58 +101,64 @@ class SingleImageCompressePreview extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
-                height: deviceSize.height * 0.25,
-                color: Colors.transparent,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        width: deviceSize.width * 0.5,
-                        child: Image.file(selectedImage.imageFile),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Width : 2000px",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Height : 2000px",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text("Image Size : 1.3 MB",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                )),
-                          ],
+              Obx(() => Container(
+                    height: deviceSize.height * 0.25,
+                    color: Colors.transparent,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            width: deviceSize.width * 0.5,
+                            child: imageController
+                                        .imagecompressed.value?.imageFile ==
+                                    null
+                                ? Image.file(selectedImage.imageFile)
+                                : Image.file(imageController
+                                    .imagecompressed.value!.imageFile),
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Width : ${selectedImage.imageWidth}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Height :  ${selectedImage.imageHeight}",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                    "Image Size : ${imageController.imagecompressed.value?.imageFile == null ? selectedImage.filesize! : imageController.imagecompressed.value!.filesize}",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  )),
               SizedBox(
                 height: 20,
               ),
@@ -182,6 +190,10 @@ class SingleImageCompressePreview extends StatelessWidget {
                           value: controller.imageWidth.value,
                           onChanged: (value) {
                             controller.imageWidth.value = value;
+                          },
+                          onChangeEnd: (value) {
+                            imageController.compressSingleImage(
+                                selectedImage.imageFile, 100 - value.toInt());
                           },
                           min: 0,
                           max: 100,

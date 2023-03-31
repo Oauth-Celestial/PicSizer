@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picsizer/Constants/AppConstants.dart';
+import 'package:picsizer/Model/FileDataModel.dart';
 
 class FileService {
   static FileService shared = FileService();
@@ -36,18 +39,20 @@ class FileService {
     }
   }
 
-  compressImage(String imagePath) async {
+  compressImage(String imagePath, int quality) async {
     final Directory temp = await getTemporaryDirectory();
     String fileName = DateTime.now().toString() + ".jpg";
     String targetPath = '${temp.path}/$fileName';
-    // File? compressedImage = await FlutterImageCompress.compressAndGetFile(
-    //     imagePath, targetPath,
-    //     quality: 45);
-    // String fileSize =
-    //     await FileHelper.shared.getFileSize(compressedImage!.path, 1);
+    File? compressedImage = await FlutterImageCompress.compressAndGetFile(
+        imagePath, targetPath,
+        quality: quality);
+    String fileSize = await getFileSize(compressedImage!.path, 1);
     // String percentage =
     //     await FileHelper.shared.getSizeDifference(imagePath, targetPath);
-    // return FileData(compressedImage, fileSize, percentage);
+    File image = File(compressedImage.path);
+    var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+    return FileData(
+        compressedImage, decodedImage.width, decodedImage.height, fileSize);
   }
 
   saveFile(File compressedImageFile) async {

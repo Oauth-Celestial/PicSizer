@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
@@ -23,6 +24,7 @@ class RootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SelectImageContoller());
     Get.put(ResizeImageContoller());
+    Get.put(CompressImageController());
     return GetMaterialApp(
       home: HomePage(),
     );
