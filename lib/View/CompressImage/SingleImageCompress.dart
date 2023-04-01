@@ -4,6 +4,7 @@ import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
+import 'package:picsizer/Services/FileService.dart';
 
 class SingleImageCompressePreview extends StatelessWidget {
   FileData selectedImage;
@@ -209,8 +210,19 @@ class SingleImageCompressePreview extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 30, right: 30),
                   child: InkWell(
-                    onTap: (() {
-                      //controller.resizeImage(selectedImage.imageFile);
+                    onTap: (() async {
+                      if (imageController.imagecompressed.value?.imageFile !=
+                          null) {
+                        FileService.shared.saveFile(
+                            imageController.imagecompressed.value!.imageFile);
+                      } else {
+                        FileService.shared.saveFile(selectedImage.imageFile);
+                      }
+
+                      SnackBar snackBar = SnackBar(
+                        content: Text('Filed Saved'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }),
                     child: Container(
                       alignment: Alignment.center,
@@ -219,7 +231,7 @@ class SingleImageCompressePreview extends StatelessWidget {
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(30)),
                       child: Text(
-                        "Resize",
+                        "Save",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

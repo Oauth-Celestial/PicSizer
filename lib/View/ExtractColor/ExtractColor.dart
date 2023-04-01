@@ -1,5 +1,6 @@
 // img.Image? photo
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:pixel_color_picker/pixel_color_picker.dart';
@@ -105,6 +106,51 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      await Clipboard.setData(
+                          ClipboardData(text: "${color?.getHexCode()}"));
+                      SnackBar snackBar = SnackBar(
+                        content: Text('Copied To ClipBoard'),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child: Icon(
+                        Icons.copy_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      height: 40,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: 130,
+                        height: 35,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Text(
+                          "Save Hex Code",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  )
                 ],
               ),
               SizedBox(

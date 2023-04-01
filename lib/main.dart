@@ -5,11 +5,8 @@ import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
-import 'package:picsizer/View/CompressImage/SingleImageCompress.dart';
-import 'package:picsizer/View/ExtractColor/ExtractColor.dart';
-
 import 'package:picsizer/View/Home/HomePage.dart';
-import 'package:picsizer/View/ResizeImage/ResizeImageScreen.dart';
+import 'package:picsizer/View/SplashScreen/SplashScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +23,7 @@ class RootPage extends StatelessWidget {
     Get.put(ResizeImageContoller());
     Get.put(CompressImageController());
     return GetMaterialApp(
-      home: HomePage(),
+      home: SplashScreen(),
     );
   }
 }
