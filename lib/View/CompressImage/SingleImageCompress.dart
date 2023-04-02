@@ -176,7 +176,7 @@ class SingleImageCompressePreview extends StatelessWidget {
                       ),
                       Obx(() {
                         return Text(
-                          "${controller.imageWidth.value.toInt()} %",
+                          "${imageController.singleImageCompressionScale.value.toInt()} %",
                           style: TextStyle(color: Colors.white),
                         );
                       })
@@ -190,7 +190,8 @@ class SingleImageCompressePreview extends StatelessWidget {
                     child: Obx(() => Slider(
                           value: controller.imageWidth.value,
                           onChanged: (value) {
-                            controller.imageWidth.value = value;
+                            imageController.singleImageCompressionScale.value =
+                                value;
                           },
                           onChangeEnd: (value) {
                             imageController.compressSingleImage(
