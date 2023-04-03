@@ -22,7 +22,7 @@ class RootPage extends StatelessWidget {
     Get.put(ResizeImageContoller());
     Get.put(CompressImageController());
     return GetMaterialApp(
-      home: MultipleImageCompress(),
+      home: SplashScreen(),
     );
   }
 }

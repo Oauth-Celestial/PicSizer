@@ -12,15 +12,30 @@ import 'package:picsizer/Model/FileDataModel.dart';
 class FileService {
   static FileService shared = FileService();
 
-  Future<String> getFileSize(String filepath, int decimals) async {
+  Future<int> getFileBytes(String filepath) async {
     var file = File(filepath);
     int bytes = await file.length();
+    return bytes;
+  }
+
+  Future<String> getFormattedBytes(int bytes, int decimals) async {
     if (bytes <= 0) return "0 B";
     const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     var i = (log(bytes) / log(1024)).floor();
     return ((bytes / pow(1024, i)).toStringAsFixed(decimals)) +
         ' ' +
         suffixes[i];
+  }
+
+  Future<String> getFileSize(String filepath, int decimals) async {
+    int bytes = await getFileBytes(filepath);
+    return await getFormattedBytes(bytes, decimals);
+  }
+
+  Future<FileData> getFileData(File imageFile) async {
+    File image = File(imageFile.path);
+    var decodedImage = await decodeImageFromList(image.readAsBytesSync());
+    return FileData(image, decodedImage.width, decodedImage.height);
   }
 
   createFolder() async {
@@ -39,7 +54,7 @@ class FileService {
     }
   }
 
-  compressImage(String imagePath, int quality) async {
+  Future<FileData> compressImage(String imagePath, int quality) async {
     final Directory temp = await getTemporaryDirectory();
     String fileName = DateTime.now().toString() + ".jpg";
     String targetPath = '${temp.path}/$fileName';

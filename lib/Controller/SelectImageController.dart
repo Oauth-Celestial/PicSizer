@@ -14,26 +14,24 @@ class SelectImageContoller extends GetxController {
   FileData? selectedImage;
   bool hasSelectedImage = false;
 
-  selectMultipleImage() async {
-    final imagePicker = ImagePicker();
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    if (selectedImages!.isNotEmpty) {
-      allSelectedImage.addAll(selectedImages);
-      userSelectedImages = [];
-      List<Future> getFileSize = [];
-      for (int i = 0; i < allSelectedImage.length; i++) {
-        getFileSize
-            .add(FileService.shared.getFileSize(allSelectedImage[i].path, 1));
-      }
-      List<dynamic> getFileSizeResponse = await Future.wait(getFileSize);
+  // selectMultipleImage() async {
 
-      // for (int i = 0; i < allSelectedImage.length; i++) {
-      //   userSelectedImages.add(
-      //       FileData(File(allSelectedImage[i].path), getFileSizeResponse[i]));
-      // }
-      hasSelectedImage = true;
-    }
-  }
+  //   if (selectedImages!.isNotEmpty) {
+  //     allSelectedImage.addAll(selectedImages);
+  //     userSelectedImages = [];
+  //     List<Future> getFileSize = [];
+  //     // for (int i = 0; i < allSelectedImage.length; i++) {
+  //     //   getFileSize
+  //     //       .add(FileService.shared.getFileSize(allSelectedImage[i].path, 1));
+  //     // }
+
+  //     // for (int i = 0; i < allSelectedImage.length; i++) {
+  //     //   userSelectedImages.add(
+  //     //       FileData(File(allSelectedImage[i].path), getFileSizeResponse[i]));
+  //     // }
+  //     hasSelectedImage = true;
+  //   }
+  // }
 
   selectSingleImage(BuildContext context, String navigateTo) async {
     final imagePicker = ImagePicker();

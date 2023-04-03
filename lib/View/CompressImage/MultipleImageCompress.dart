@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
+import 'package:picsizer/Model/MultiCompressModel.dart';
 
 import '../../Controller/CompressImageController.dart';
 
 class MultipleImageCompress extends StatelessWidget {
-  const MultipleImageCompress({super.key});
+  MultiCompressModel userImages;
+  MultipleImageCompress({required this.userImages});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,46 @@ class MultipleImageCompress extends StatelessWidget {
           children: [
             Expanded(
                 child: Container(
-              color: Colors.amber,
+              child: GridView.builder(
+                  itemCount: userImages.userSelectedImages.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5,
+                      crossAxisCount: 3,
+                      childAspectRatio: 1 / 1),
+                  itemBuilder: (context, index) {
+                    File image = userImages.userSelectedImages[index].imageFile;
+                    return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.file(image),
+                              Container(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(right: 5),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 20,
+                                    height: 20,
+                                    child: Text("${index + 1}"),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ).animate().fadeIn(
+                              delay: Duration(
+                                milliseconds: 100 * (index + 1),
+                              ),
+                            ));
+                  }),
             )),
             SizedBox(
               height: 20,
@@ -41,7 +85,7 @@ class MultipleImageCompress extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "Total Images Selected :- 100",
+                            "Total Images Selected :- ${userImages.userSelectedImages.length}",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -60,7 +104,7 @@ class MultipleImageCompress extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            "Total Selection size :- 100 Mb",
+                            "Total Selection size :- ${userImages.totalSize}",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

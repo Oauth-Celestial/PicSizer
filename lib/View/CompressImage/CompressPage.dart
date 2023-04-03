@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
+import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
 
@@ -54,7 +55,10 @@ class CompressImage extends StatelessWidget {
                 onTap: () {
                   // SelectImageContoller controller = Get.find();
                   // controller.selectSingleImage(context, "single compress");
-                  Get.to(MultipleImageCompress());
+                  // Get.to(MultipleImageCompress());
+
+                  CompressImageController controller = Get.find();
+                  controller.compressMultipleImage(context);
                 },
                 child: Container(
                   alignment: Alignment.center,
