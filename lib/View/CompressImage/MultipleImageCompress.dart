@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Model/MultiCompressModel.dart';
+import 'package:picsizer/View/CompressImage/ProcessImage.dart';
 
 import '../../Controller/CompressImageController.dart';
 
@@ -151,10 +152,6 @@ class MultipleImageCompress extends StatelessWidget {
                                 imageController.multipleImageCompressionScale
                                     .value = value;
                               },
-                              onChangeEnd: (value) {
-                                // imageController.compressSingleImage(
-                                //     selectedImage.imageFile, 100 - value.toInt());
-                              },
                               min: 0,
                               max: 100,
                             )),
@@ -180,16 +177,25 @@ class MultipleImageCompress extends StatelessWidget {
                       style: TextStyle(color: Colors.blueAccent),
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.blue),
-                    child: Text(
-                      "Start",
-                      style: TextStyle(color: Colors.white),
+                  InkWell(
+                    onTap: () {
+                      imageController.compressMultipleImage(
+                          userImages,
+                          imageController.multipleImageCompressionScale.value
+                              .toInt());
+                      Get.to(ProcessImage());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.blue),
+                      child: Text(
+                        "Start",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   )
                 ],

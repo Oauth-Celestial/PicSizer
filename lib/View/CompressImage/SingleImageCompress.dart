@@ -188,7 +188,8 @@ class SingleImageCompressePreview extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Obx(() => Slider(
-                          value: controller.imageWidth.value,
+                          value:
+                              imageController.singleImageCompressionScale.value,
                           onChanged: (value) {
                             imageController.singleImageCompressionScale.value =
                                 value;

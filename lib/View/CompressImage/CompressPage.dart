@@ -58,7 +58,7 @@ class CompressImage extends StatelessWidget {
                   // Get.to(MultipleImageCompress());
 
                   CompressImageController controller = Get.find();
-                  controller.compressMultipleImage(context);
+                  controller.selectMultipleImage(context);
                 },
                 child: Container(
                   alignment: Alignment.center,

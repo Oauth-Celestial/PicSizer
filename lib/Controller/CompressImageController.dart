@@ -8,20 +8,43 @@ import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Model/MultiCompressModel.dart';
 import 'package:picsizer/Services/FileService.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
+import 'package:picsizer/View/CompressImage/ResultPage.dart';
 
 class CompressImageController extends GetxController {
   var imagecompressed = Rxn<FileData>();
   var multiImageCompress = RxList<FileData>();
   RxDouble singleImageCompressionScale = 0.0.obs;
   RxDouble multipleImageCompressionScale = 0.0.obs;
+  RxInt imageProcessed = 0.obs;
   MultiCompressModel? data;
+  MultiCompressModel? compressResult;
 
   compressSingleImage(File selectedImage, int quality) async {
     imagecompressed.value =
         await FileService.shared.compressImage(selectedImage.path, quality);
   }
 
-  compressMultipleImage(BuildContext context) async {
+  compressMultipleImage(MultiCompressModel model, int quality) async {
+    multiImageCompress.value = [];
+    imageProcessed.value = 0;
+    int totalSize = 0;
+    await Future.forEach(model.userSelectedImages, (element) async {
+      FileData data = await FileService.shared
+          .compressImage(element.imageFile.path, quality);
+      imageProcessed.value += 1;
+      totalSize += await FileService.shared.getFileBytes(data.imageFile.path);
+
+      multiImageCompress.add(data);
+      //totalSize += await FileService.shared.getFileBytes(element.path);
+    });
+    String selectionSize =
+        await FileService.shared.getFormattedBytes(totalSize, 2);
+    compressResult = MultiCompressModel(
+        totalSize: selectionSize, userSelectedImages: multiImageCompress);
+    Get.to(ImageCompressResult());
+  }
+
+  selectMultipleImage(BuildContext context) async {
     final imagePicker = ImagePicker();
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
 
