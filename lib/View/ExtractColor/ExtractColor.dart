@@ -12,10 +12,21 @@ class ExtractColorScreen extends StatefulWidget {
   _ExtractColorScreenState createState() => _ExtractColorScreenState();
 }
 
-extension hexcode on Color {
-  String getHexCode() {
-    return '#${this.value.toRadixString(16)}';
+extension HexColor on Color {
+  /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
   }
+
+  /// Prefixes a hash sign if [leadingHashSign] is set to `true` (default is `true`).
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }
 
 class _ExtractColorScreenState extends State<ExtractColorScreen> {
@@ -98,7 +109,7 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      "${color?.getHexCode()}",
+                      "${color?.toHex().substring(3)}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -111,8 +122,8 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await Clipboard.setData(
-                          ClipboardData(text: "${color?.getHexCode()}"));
+                      await Clipboard.setData(ClipboardData(
+                          text: "${color?.toHex().substring(3)}"));
                       SnackBar snackBar = SnackBar(
                         content: Text('Copied To ClipBoard'),
                       );

@@ -1,14 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
-import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
-import 'package:picsizer/View/CompressImage/ProcessImage.dart';
-import 'package:picsizer/View/CompressImage/ResultPage.dart';
 import 'package:picsizer/View/SplashScreen/SplashScreen.dart';
 
 void main() async {

@@ -165,16 +165,22 @@ class MultipleImageCompress extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: 150,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: Colors.blueAccent, width: 2)),
-                    child: Text(
-                      "Reset",
-                      style: TextStyle(color: Colors.blueAccent),
+                  InkWell(
+                    onTap: (() {
+                      Navigator.of(context).pop();
+                    }),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          border:
+                              Border.all(color: Colors.blueAccent, width: 2)),
+                      child: Text(
+                        "Reset",
+                        style: TextStyle(color: Colors.blueAccent),
+                      ),
                     ),
                   ),
                   InkWell(

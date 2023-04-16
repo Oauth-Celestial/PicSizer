@@ -28,9 +28,27 @@ class CompressImageController extends GetxController {
     multiImageCompress.value = [];
     imageProcessed.value = 0;
     int totalSize = 0;
+    int compressionScale = 0;
+
+    if (quality > 80) {
+      compressionScale = 15;
+    }
+
+    if (quality > 50) {
+      compressionScale = 30;
+    }
+
+    if (quality <= 30) {
+      compressionScale = 55;
+    }
+
+    if (quality <= 50) {
+      compressionScale = 45;
+    }
+
     await Future.forEach(model.userSelectedImages, (element) async {
       FileData data = await FileService.shared
-          .compressImage(element.imageFile.path, quality);
+          .compressImage(element.imageFile.path, compressionScale);
       imageProcessed.value += 1;
       totalSize += await FileService.shared.getFileBytes(data.imageFile.path);
 
