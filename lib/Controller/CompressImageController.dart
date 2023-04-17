@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Model/MultiCompressModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
 import 'package:picsizer/View/CompressImage/ResultPage.dart';
 
@@ -59,7 +60,25 @@ class CompressImageController extends GetxController {
         await FileService.shared.getFormattedBytes(totalSize, 2);
     compressResult = MultiCompressModel(
         totalSize: selectionSize, userSelectedImages: multiImageCompress);
-    Get.to(ImageCompressResult());
+    Get.to(HappyAnimation());
+  }
+
+  saveMultipleFile(BuildContext context) async {
+    await Future.forEach(multiImageCompress, (element) async {
+      await FileService.shared.saveFile(element.imageFile);
+    });
+
+    SnackBar snackBar = SnackBar(
+      content: Text('All Files Saved'),
+      action: SnackBarAction(
+        label: 'OK',
+        textColor: Colors.purple,
+        onPressed: () {
+          // Some code to undo the change.
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   selectMultipleImage(BuildContext context) async {

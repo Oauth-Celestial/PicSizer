@@ -28,6 +28,7 @@ class ImageCompressResult extends StatelessWidget {
                     onTap: (() {
                       Navigator.of(context).pop();
                       Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     }),
                     child: Container(
                       child: Icon(
@@ -35,12 +36,28 @@ class ImageCompressResult extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 10,
+            ),
+            ResultCard(),
+            SizedBox(
+              height: 70,
+            ),
+            Container(
+              child: Text(
+                "Image Compressed :-  ${imageController.multiImageCompress.length}",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Container(
               child: Row(
@@ -101,10 +118,35 @@ class ImageCompressResult extends StatelessWidget {
                 ],
               ),
             ),
+            Expanded(
+                child: Container(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(left: 30, right: 30),
+                child: InkWell(
+                  onTap: (() {
+                    imageController.saveMultipleFile(context);
+                  }),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Text(
+                      "Save All",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+            )),
             SizedBox(
-              height: 40,
-            ),
-            ResultCard()
+              height: 30,
+            )
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/SplashScreen/SplashScreen.dart';
 
 void main() async {
