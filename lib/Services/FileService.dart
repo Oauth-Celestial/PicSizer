@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:picsizer/Constants/AppConstants.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class FileService {
   static FileService shared = FileService();
@@ -100,5 +101,13 @@ class FileService {
 
   getAssetPath({required String fileNameWithExtension}) {
     return "assets/$fileNameWithExtension";
+  }
+
+  savePdf(PdfDocument document) async {
+    String filename = DateTime.now().toString() + ".pdf";
+
+    String targetPath = basepath + "/$filename";
+    final output = File(targetPath);
+    await output.writeAsBytes(await document.save());
   }
 }

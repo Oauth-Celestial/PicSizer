@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/View/CompressImage/CompressPage.dart';
+import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/CompressImage/ResultPageCard.dart';
 
 class ImageCompressResult extends StatelessWidget {
