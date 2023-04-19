@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
+import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Model/HomeTileModel.dart';
 import 'package:picsizer/View/CompressImage/CompressPage.dart';
+import 'package:picsizer/View/ImageToPdf/PdfImageSelection.dart';
 
 class HomeTile extends StatelessWidget {
   HomeTileModel tileData;
@@ -15,6 +17,7 @@ class HomeTile extends StatelessWidget {
     return InkWell(
       onTap: () {
         SelectImageContoller controller = Get.find<SelectImageContoller>();
+        PdfMakerController pdfController = Get.find<PdfMakerController>();
         switch (tileData.title.toLowerCase()) {
           case "resize image":
             controller.selectSingleImage(context, "resize image");
@@ -24,6 +27,10 @@ class HomeTile extends StatelessWidget {
             break;
           case "compress image":
             Get.to(CompressImage());
+            break;
+          case "image to pdf":
+            pdfController.selectMultipleImage(context);
+            break;
         }
       },
       child: Container(

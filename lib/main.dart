@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Controller/CompressImageController.dart';
+import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
@@ -21,6 +22,7 @@ class RootPage extends StatelessWidget {
     Get.put(SelectImageContoller());
     Get.put(ResizeImageContoller());
     Get.put(CompressImageController());
+    Get.put(PdfMakerController());
     return GetMaterialApp(
       home: SplashScreen(),
     );

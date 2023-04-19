@@ -17,6 +17,9 @@ class HomePageController extends GetxController {
         tileIcon: Icon(Icons.compress, color: blackBackground)),
     HomeTileModel(
         title: "Extract Color",
-        tileIcon: Icon(Icons.palette, color: blackBackground))
+        tileIcon: Icon(Icons.palette, color: blackBackground)),
+    HomeTileModel(
+        title: "Image To Pdf",
+        tileIcon: Icon(Icons.picture_as_pdf, color: blackBackground))
   ];
 }

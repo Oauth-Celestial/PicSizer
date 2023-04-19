@@ -103,11 +103,12 @@ class FileService {
     return "assets/$fileNameWithExtension";
   }
 
-  savePdf(PdfDocument document) async {
-    String filename = DateTime.now().toString() + ".pdf";
+  savePdf(List<int> data) async {
+    String filename = DateTime.now().microsecondsSinceEpoch.toString() + ".pdf";
 
     String targetPath = basepath + "/$filename";
     final output = File(targetPath);
-    await output.writeAsBytes(await document.save());
+    print(targetPath);
+    await output.writeAsBytes(data);
   }
 }
