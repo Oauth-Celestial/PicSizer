@@ -5,6 +5,7 @@ import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/Services/NetworkService/ConnectionHelper.dart';
 import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/SplashScreen/SplashScreen.dart';
 
@@ -23,9 +24,7 @@ class RootPage extends StatelessWidget {
     Get.put(ResizeImageContoller());
     Get.put(CompressImageController());
     Get.put(PdfMakerController());
-    return GetMaterialApp(
-      home: SplashScreen(),
-    );
+    return GetMaterialApp(home: SplashScreen());
   }
 }
 
@@ -37,3 +36,5 @@ class RootPage extends StatelessWidget {
 // https://gist.github.com/roipeker/9315aa25301f5c0362caaebd15876c2f get color of pixel
 
 // image_editor_plus: ^0.2.0
+
+// https://www.youtube.com/watch?v=PPmklgYoVjw
