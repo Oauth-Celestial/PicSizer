@@ -1,8 +1,9 @@
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/View/Home/HomePage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,78 +14,111 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  bool hasCompletedAnimation = false;
-
-  goToHome() async {
-    await Future.delayed(Duration(seconds: 1), () {
-      Get.to(HomePage());
-    });
-  }
-
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
+    with TickerProviderStateMixin {
+  late AnimationController circleAnimationController;
+  late AnimationController opacityAnimationController;
+  late AnimationController postionAnimationController;
+  Animation? sizeAnimation;
+  Animation? opacity;
+  Animation? positionAnimation;
 
   @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    circleAnimationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    opacityAnimationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+
+    postionAnimationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+
+    positionAnimation =
+        Tween<double>(begin: 0.0, end: 0.0).animate(postionAnimationController);
+
+    sizeAnimation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(circleAnimationController);
+    opacity =
+        Tween<double>(begin: 0.0, end: 1.0).animate(opacityAnimationController);
+
+    circleAnimationController.forward().whenComplete(() => {
+          opacityAnimationController.forward().whenComplete(() {
+            Get.to(HomePage(),
+                transition: Transition.circularReveal,
+                duration: Duration(seconds: 3));
+          })
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: blackBackground,
+      backgroundColor: Colors.black,
       body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Stack(
-            fit: StackFit.loose,
-            children: [
-              Container(
-                  alignment: Alignment.center,
-                  child: AnimatedContainer(
-                    width: hasCompletedAnimation ? 0 : 200,
-                    height: hasCompletedAnimation ? 0 : 200,
-                    duration: Duration(seconds: 1),
-                    alignment: Alignment.center,
-                    child: LottieBuilder.asset("assets/SplashAnimation.json",
-                        repeat: false, onLoaded: (composition) {
-                      _controller?.duration = composition.duration;
+        child: Stack(
+          children: [
+            // Container(
+            //     alignment: Alignment.topCenter,
+            //     child: AnimatedBuilder(
+            //       animation: postionAnimationController,
+            //       builder: ((context, child) {
+            //         return Positioned(
+            //           top: positionAnimation?.value,
+            //           left: 100,
+            //           child: ClipOval(
+            //             child: Container(
+            //               width: 40,
+            //               height: 40,
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         );
+            //       }),
+            //     )),
 
-                      _controller?.forward().whenComplete(() async {
-                        setState(() {
-                          hasCompletedAnimation = true;
-                        });
-                        goToHome();
-                      });
-                    }),
-                  )),
-              AnimatedOpacity(
-                duration: Duration(seconds: 1),
-                opacity: hasCompletedAnimation ? 1 : 0,
-                child: Align(
-                  child: Text(
-                    "Pic Sizer",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 50,
-          ),
-        ],
-      )),
+            Container(
+                child: AnimatedBuilder(
+                    animation: circleAnimationController,
+                    builder: ((context, child) {
+                      print(circleAnimationController.value);
+                      print(sizeAnimation?.value);
+                      return Center(
+                          child: ClipOval(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width *
+                              sizeAnimation?.value,
+                          height: MediaQuery.of(context).size.width *
+                              sizeAnimation?.value,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ));
+                    }))),
+            Container(
+              child: AnimatedBuilder(
+                animation: opacityAnimationController,
+                builder: ((context, child) {
+                  print("Opacity controller ${opacity?.value}");
+                  return Opacity(
+                    opacity: opacity?.value,
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          "Pic Sizer",
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -4,9 +4,11 @@ import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
+import 'package:picsizer/CustomWidget/ParallexList.dart';
 import 'package:picsizer/Services/FileService.dart';
 import 'package:picsizer/Services/NetworkService/ConnectionHelper.dart';
 import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
+
 import 'package:picsizer/View/SplashScreen/SplashScreen.dart';
 
 void main() async {
@@ -38,3 +40,8 @@ class RootPage extends StatelessWidget {
 // image_editor_plus: ^0.2.0
 
 // https://www.youtube.com/watch?v=PPmklgYoVjw
+
+
+// Parallex effect 
+
+//  https://www.youtube.com/watch?v=tq7LFM1-pJs

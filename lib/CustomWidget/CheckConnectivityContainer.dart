@@ -18,6 +18,8 @@ class ConnectivityConatiner extends StatelessWidget {
               return Container(
                 child: snapshot.data == NetworkStatus.online
                     ? Visibility(visible: false, child: Container())
+
+                    // Your No Internet widget
                     : Align(
                         alignment: Alignment.center,
                         child: LottieBuilder.asset("assets/wifi.json"),

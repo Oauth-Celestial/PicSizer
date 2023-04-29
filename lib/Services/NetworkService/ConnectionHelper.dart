@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 
 enum NetworkStatus { online, offline }
 
+// Dependency : connectivity_plus: ^3.0.4
 class ConnectionHelper {
   StreamController<NetworkStatus> controller = StreamController();
 
