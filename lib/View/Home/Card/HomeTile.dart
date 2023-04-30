@@ -4,6 +4,7 @@ import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Model/HomeTileModel.dart';
+import 'package:picsizer/Services/FontHelper.dart';
 import 'package:picsizer/View/CompressImage/CompressPage.dart';
 import 'package:picsizer/View/ImageToPdf/PdfImageSelection.dart';
 
@@ -44,13 +45,13 @@ class HomeTile extends StatelessWidget {
                 children: [
                   Padding(
                     padding: EdgeInsets.only(left: 10, top: 13),
-                    child: Text(
-                      "${tileData.title}",
-                      style: TextStyle(
-                          color: blackBackground,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
+                    child: Text("${tileData.title}",
+                        style: FontHelper.mediumNotaSansItalic(
+                          TextStyle(
+                              color: blackBackground,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 19),
+                        )),
                   )
                 ],
               ),

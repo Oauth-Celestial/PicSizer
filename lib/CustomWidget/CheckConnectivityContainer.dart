@@ -20,7 +20,8 @@ class ConnectivityConatiner extends StatelessWidget {
                     ? Visibility(visible: false, child: Container())
 
                     // Your No Internet widget
-                    : Align(
+                    : Container(
+                        color: Colors.transparent,
                         alignment: Alignment.center,
                         child: LottieBuilder.asset("assets/wifi.json"),
                       ),

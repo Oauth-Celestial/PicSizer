@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:picsizer/Controller/HomePageController.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/CustomWidget/CheckConnectivityContainer.dart';
+import 'package:picsizer/Services/FontHelper.dart';
 import 'package:picsizer/View/Home/Card/HomeTile.dart';
 
 class HomePage extends StatelessWidget {
@@ -30,7 +31,8 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20),
                 child: Text(
                   "What Can\nI help you with ?",
-                  style: TextStyle(color: Colors.white, fontSize: 30),
+                  style: FontHelper.regularPaytone(
+                      TextStyle(color: Colors.white, fontSize: 28)),
                 ),
               )
                   .animate()
