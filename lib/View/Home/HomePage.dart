@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Controller/HomePageController.dart';
 import 'package:picsizer/Constants/AppColors.dart';
-import 'package:picsizer/CustomWidget/CheckConnectivityContainer.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 import 'package:picsizer/Services/FontHelper.dart';
 import 'package:picsizer/View/Home/Card/HomeTile.dart';
 
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 child: Text(
                   "What Can\nI help you with ?",
                   style: FontHelper.regularPaytone(
-                      TextStyle(color: Colors.white, fontSize: 28)),
+                      TextStyle(color: Colors.white, fontSize: 26)),
                 ),
               )
                   .animate()

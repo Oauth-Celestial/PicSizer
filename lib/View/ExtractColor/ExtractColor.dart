@@ -1,9 +1,9 @@
 // img.Image? photo
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pick_color/pick_color.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
-import 'package:pixel_color_picker/pixel_color_picker.dart';
 
 class ExtractColorScreen extends StatefulWidget {
   FileData selectedImage;
@@ -12,25 +12,8 @@ class ExtractColorScreen extends StatefulWidget {
   _ExtractColorScreenState createState() => _ExtractColorScreenState();
 }
 
-extension HexColor on Color {
-  /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
-  static Color fromHex(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
-  /// Prefixes a hash sign if [leadingHashSign] is set to `true` (default is `true`).
-  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
-      '${alpha.toRadixString(16).padLeft(2, '0')}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';
-}
-
 class _ExtractColorScreenState extends State<ExtractColorScreen> {
-  String _hexColor = '';
+  String hexColor = '';
   late Image image;
   Color? color = Colors.blue;
 
@@ -109,7 +92,7 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                   Container(
                     alignment: Alignment.center,
                     child: Text(
-                      "${color?.toHex().substring(3)}",
+                      "${hexColor}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
@@ -122,8 +105,8 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await Clipboard.setData(ClipboardData(
-                          text: "${color?.toHex().substring(3)}"));
+                      await Clipboard.setData(
+                          ClipboardData(text: "${hexColor}"));
                       SnackBar snackBar = SnackBar(
                         content: Text('Copied To ClipBoard'),
                       );
@@ -171,21 +154,13 @@ class _ExtractColorScreenState extends State<ExtractColorScreen> {
                 child: ListView(
                   children: [
                     Container(
-                      child: InteractiveViewer(
-                        onInteractionUpdate: ((details) {
-                          print(details.focalPoint.dx);
-                        }),
-                        child: PixelColorPicker(
+                        child: ColorPicker(
                             child: image,
-                            onChanged: (color) {
-                              setState(() {
-                                this.color = color;
-
-                                // print("${color.value.}")
-                              });
-                            }),
-                      ),
-                    ),
+                            onChanged: (data) {
+                              hexColor = data.hexCode;
+                              color = data.selectionColor;
+                              setState(() {});
+                            })),
                   ],
                 ),
               ),
