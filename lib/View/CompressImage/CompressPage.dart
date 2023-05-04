@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
 
 class CompressImage extends StatelessWidget {
@@ -18,7 +19,7 @@ class CompressImage extends StatelessWidget {
       ),
       backgroundColor: blackBackground,
       body: SafeArea(
-          child: Container(
+          child: ConnectivityConatiner(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

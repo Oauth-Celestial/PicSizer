@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 
 class PdfImagePreview extends StatelessWidget {
   List<FileData> userSelectedImage;
@@ -22,7 +23,7 @@ class PdfImagePreview extends StatelessWidget {
       appBar: AppBar(
         title: Text("IImage To Pdf"),
       ),
-      body: Container(
+      body: ConnectivityConatiner(
         child: Column(
           children: [
             Expanded(

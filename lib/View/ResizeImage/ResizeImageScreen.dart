@@ -4,6 +4,7 @@ import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 
 class ResizeImageScreen extends StatelessWidget {
   FileData selectedImage;
@@ -21,7 +22,7 @@ class ResizeImageScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-          child: Container(
+          child: ConnectivityConatiner(
         child: Column(
           children: [
             SizedBox(

@@ -5,6 +5,7 @@ import 'package:picsizer/Controller/CompressImageController.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 
 class SingleImageCompressePreview extends StatelessWidget {
   FileData selectedImage;
@@ -23,7 +24,7 @@ class SingleImageCompressePreview extends StatelessWidget {
         title: Text("Preview"),
       ),
       body: SafeArea(
-        child: Container(
+        child: ConnectivityConatiner(
           child: ListView(
             children: [
               Padding(

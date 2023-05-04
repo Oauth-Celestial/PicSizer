@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Model/MultiCompressModel.dart';
+import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 import 'package:picsizer/View/CompressImage/ProcessImage.dart';
 
 import '../../Controller/CompressImageController.dart';
@@ -25,7 +26,7 @@ class MultipleImageCompress extends StatelessWidget {
         centerTitle: true,
       ),
       body: SafeArea(
-          child: Container(
+          child: ConnectivityConatiner(
         child: Column(
           children: [
             Expanded(
