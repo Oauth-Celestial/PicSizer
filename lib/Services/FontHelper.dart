@@ -9,8 +9,8 @@ class FontHelper {
 
   static TextStyle mediumNotaSansItalic(TextStyle style) {
     return style.copyWith(
-        fontFamily: "NotoSans",
-        fontWeight: FontWeight.w500,
-        fontStyle: FontStyle.italic);
+      fontFamily: "NotoSans",
+      fontWeight: FontWeight.w500,
+    );
   }
 }

@@ -9,7 +9,7 @@ import 'package:picsizer/Model/MultiCompressModel.dart';
 import 'package:picsizer/Services/FileService.dart';
 import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
-import 'package:picsizer/View/CompressImage/ResultPage.dart';
+
 
 class CompressImageController extends GetxController {
   var imagecompressed = Rxn<FileData>();

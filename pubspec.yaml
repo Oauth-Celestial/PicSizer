@@ -100,11 +100,15 @@ flutter:
           weight: 700
 
 #NotoSansItalic.ttf
+#NotoSansMedium.ttf
     - family: NotoSans
       fonts: 
         - asset: fonts/NotoSansItalic.ttf
-          weight: 500
+          weight: 300
           style: italic
+        - asset: fonts/NotoSansMedium.ttf
+          weight: 500
+          
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

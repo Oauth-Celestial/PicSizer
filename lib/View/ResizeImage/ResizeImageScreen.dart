@@ -4,6 +4,7 @@ import 'package:picsizer/Constants/AppColors.dart';
 import 'package:picsizer/Controller/ResizeImageContoller.dart';
 import 'package:picsizer/Model/FileDataModel.dart';
 import 'package:picsizer/Services/FileService.dart';
+import 'package:picsizer/Services/FontHelper.dart';
 import 'package:picsizer/Services/NetworkService/CheckConnectivityContainer.dart';
 
 class ResizeImageScreen extends StatelessWidget {
@@ -18,7 +19,11 @@ class ResizeImageScreen extends StatelessWidget {
       backgroundColor: blackBackground,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text("Resize Image"),
+        title: Text(
+          "Resize Image",
+          style: FontHelper.regularPaytone(
+              TextStyle(fontSize: 18, color: Colors.white)),
+        ),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -30,7 +35,7 @@ class ResizeImageScreen extends StatelessWidget {
             ),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.45,
+              height: MediaQuery.of(context).size.height * 0.40,
               child: Image.file(selectedImage.imageFile),
             ),
             SizedBox(
@@ -42,10 +47,8 @@ class ResizeImageScreen extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Original Dimensions ${selectedImage.imageWidth} X ${selectedImage.imageHeight} ",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                  style: FontHelper.mediumNotaSansItalic(
+                      TextStyle(fontSize: 18, color: Colors.white)),
                 ),
               ),
             ),
@@ -61,12 +64,14 @@ class ResizeImageScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Image Width",
-                      style: TextStyle(color: Colors.white),
+                      style: FontHelper.mediumNotaSansItalic(
+                          TextStyle(fontSize: 15, color: Colors.white)),
                     ),
                     Obx(() {
                       return Text(
                         "${controller.imageWidth.value.toInt()} px",
-                        style: TextStyle(color: Colors.white),
+                        style: FontHelper.mediumNotaSansItalic(
+                            TextStyle(fontSize: 15, color: Colors.white)),
                       );
                     })
                   ],
@@ -99,12 +104,14 @@ class ResizeImageScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Image height",
-                      style: TextStyle(color: Colors.white),
+                      style: FontHelper.mediumNotaSansItalic(
+                          TextStyle(fontSize: 15, color: Colors.white)),
                     ),
                     Obx(() {
                       return Text(
                         "${controller.imageHeight.value.toInt()} px",
-                        style: TextStyle(color: Colors.white),
+                        style: FontHelper.mediumNotaSansItalic(
+                            TextStyle(fontSize: 15, color: Colors.white)),
                       );
                     })
                   ],
@@ -126,31 +133,41 @@ class ResizeImageScreen extends StatelessWidget {
               ],
             ),
             Expanded(
-                child: Container(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.only(left: 30, right: 30),
-                child: InkWell(
-                  onTap: (() {
-                    controller.resizeImage(selectedImage.imageFile);
-                  }),
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text(
-                      "Resize",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ),
-                ),
-              ),
-            ))
+                child: Obx(() => Container(
+                      alignment: Alignment.center,
+                      child: Padding(
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: InkWell(
+                            onTap: (() {
+                              if (controller.isProcessing.value == false) {
+                                controller.resizeImage(selectedImage.imageFile);
+                              }
+                            }),
+                            child: AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.easeInOut,
+                              width: controller.isProcessing.value == false
+                                  ? MediaQuery.of(context).size.width
+                                  : 50,
+                              alignment: Alignment.center,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue,
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: controller.isProcessing.value == false
+                                  ? Text(
+                                      "Resize",
+                                      style: FontHelper.regularPaytone(
+                                          TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.white)),
+                                    )
+                                  : CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                            ),
+                          )),
+                    )))
           ],
         ),
       )),

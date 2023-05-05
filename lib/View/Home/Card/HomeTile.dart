@@ -50,7 +50,7 @@ class HomeTile extends StatelessWidget {
                           TextStyle(
                               color: blackBackground,
                               fontWeight: FontWeight.bold,
-                              fontSize: 19),
+                              fontSize: 15),
                         )),
                   )
                 ],
