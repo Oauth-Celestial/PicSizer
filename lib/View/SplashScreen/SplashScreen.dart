@@ -1,8 +1,5 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:connectivity_watcher/NetworkService/Connectivity_Watcher.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:picsizer/View/Home/HomePage.dart';
 
@@ -24,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
+    ConnectivityWatcher.shared.setup(widgetForNoInternet: noInternet());
     circleAnimationController =
         AnimationController(vsync: this, duration: Duration(seconds: 0));
     opacityAnimationController =
@@ -40,6 +38,34 @@ class _SplashScreenState extends State<SplashScreen>
                 duration: Duration(seconds: 3));
           })
         });
+  }
+
+  Widget noInternet() {
+    return Container(
+      color: Colors.transparent,
+      child: Align(
+        alignment: Alignment.center,
+        child: Container(
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  "No Internet Available",
+                  style: TextStyle(color: Colors.black12),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
