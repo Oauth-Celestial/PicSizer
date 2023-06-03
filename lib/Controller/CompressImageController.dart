@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,7 +7,6 @@ import 'package:picsizer/Model/MultiCompressModel.dart';
 import 'package:picsizer/Services/FileService.dart';
 import 'package:picsizer/View/CompressImage/HappyAnimation.dart';
 import 'package:picsizer/View/CompressImage/MultipleImageCompress.dart';
-
 
 class CompressImageController extends GetxController {
   var imagecompressed = Rxn<FileData>();

@@ -21,6 +21,10 @@ class PdfMakerController extends GetxController {
     FileService.shared.savePdf(data);
   }
 
+  data() async {
+    String data = "0";
+  }
+
   selectMultipleImage(BuildContext context) async {
     final imagePicker = ImagePicker();
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();

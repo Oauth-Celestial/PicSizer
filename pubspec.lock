@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: connectivity_watcher
-      sha256: a1dc5a3e1f3b5af893ad9aac8a1f606564d49998e08acca477f1a11fd42e9cbe
+      sha256: e047a810ac7fa5b53d52217a08bca5e5a23df87ee999cfc613debf4f9b4147a7
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   convert:
     dependency: transitive
     description:

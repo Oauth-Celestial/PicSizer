@@ -5,8 +5,7 @@ import 'package:picsizer/Controller/PdfMakerController.dart';
 import 'package:picsizer/Controller/SelectImageController.dart';
 import 'package:picsizer/Model/HomeTileModel.dart';
 import 'package:picsizer/Services/FontHelper.dart';
-import 'package:picsizer/View/CompressImage/CompressPage.dart';
-import 'package:picsizer/View/ImageToPdf/PdfImageSelection.dart';
+import 'package:picsizer/View/Home/Card/AppBottomSheet.dart';
 
 class HomeTile extends StatelessWidget {
   HomeTileModel tileData;
@@ -27,7 +26,9 @@ class HomeTile extends StatelessWidget {
             controller.selectSingleImage(context, "extract color");
             break;
           case "compress image":
-            Get.to(CompressImage());
+            // Get.to(CompressImage());
+            buildSheet(context);
+
             break;
           case "image to pdf":
             pdfController.selectMultipleImage(context);

@@ -19,9 +19,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    ConnectivityWatcher.shared.setup(widgetForNoInternet: noInternet());
+    ConnectivityWatcher.shared.setup();
     circleAnimationController =
         AnimationController(vsync: this, duration: Duration(seconds: 0));
     opacityAnimationController =
